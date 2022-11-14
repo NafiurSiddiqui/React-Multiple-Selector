@@ -1,4 +1,25 @@
-import { useCallback, useState } from 'react';
+import { memo, useCallback, useState } from 'react';
+
+const ListItem = memo(({ items, onClick }) => {
+	return (
+		<ul className="List">
+			{items.map((item) => {
+				return (
+					<li
+						key={item.name}
+						className={`List__item List__item--${item.color}
+						`}
+						onClick={onClick}
+						data-checked="false"
+					>
+						{console.log('List')}
+						{item.name}
+					</li>
+				);
+			})}
+		</ul>
+	);
+});
 
 const List = ({ items }) => {
 	console.log('rendered');
@@ -35,22 +56,7 @@ const List = ({ items }) => {
 				<h2>Such an Empty Fruit Basket :/</h2>
 			)}
 
-			<ul className="List">
-				{items.map((item) => {
-					return (
-						<li
-							key={item.name}
-							className={`List__item List__item--${item.color}
-						`}
-							onClick={clickHandler}
-							data-checked="false"
-						>
-							{console.log('List')}
-							{item.name}
-						</li>
-					);
-				})}
-			</ul>
+			<ListItem items={items} onClick={clickHandler} />
 		</>
 	);
 };
