@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 const List = ({ items }) => {
+	console.log('rendered');
 	const [selectedItem, setSelectedItem] = useState([]);
 
-	const clickHandler = (e) => {
+	const clickHandler = useCallback((e) => {
 		const target = e.target;
 		const targetName = e.target.innerHTML;
 
@@ -18,9 +19,7 @@ const List = ({ items }) => {
 			target.classList.remove('selected');
 			setSelectedItem((item) => item.filter((item) => item !== targetName));
 		}
-	};
-
-	console.log(selectedItem);
+	}, []);
 
 	return (
 		<>
@@ -35,6 +34,7 @@ const List = ({ items }) => {
 			) : (
 				<h2>Such an Empty Fruit Basket :/</h2>
 			)}
+
 			<ul className="List">
 				{items.map((item) => {
 					return (
@@ -45,6 +45,7 @@ const List = ({ items }) => {
 							onClick={clickHandler}
 							data-checked="false"
 						>
+							{console.log('List')}
 							{item.name}
 						</li>
 					);
