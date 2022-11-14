@@ -3,7 +3,6 @@ div#root {
 }
 
 .selected {
-	/* border: 4px solid darkorange; */
 	outline: 4px solid darkorange;
 }
 
